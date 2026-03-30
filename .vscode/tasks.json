@@ -1,0 +1,90 @@
+{
+    // Shadow Broker Protocol — Sui Move + Frontend development tasks.
+    // Move tasks prompt for a package path via ${input:movePkgPath}.
+    "version": "2.0.0",
+    "inputs": [
+        {
+            "id": "movePkgPath",
+            "description": "Relative path to the Move package directory (e.g., contracts/shadow_broker)",
+            "type": "promptString",
+            "default": "contracts/shadow_broker"
+        }
+    ],
+    "tasks": [
+        {
+            "label": "Sui: Move Build",
+            "type": "shell",
+            "command": "sui move build --path ${input:movePkgPath}",
+            "group": "build",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "Sui: Move Test",
+            "type": "shell",
+            "command": "sui move test --path ${input:movePkgPath}",
+            "group": "test",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "Sui: Client Active Env",
+            "type": "shell",
+            "command": "sui client active-env",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "Sui: Client Envs",
+            "type": "shell",
+            "command": "sui client envs",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "Sui: Publish (interactive)",
+            "type": "shell",
+            "command": "sui client publish --path ${input:movePkgPath}",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "focus": true
+            }
+        },
+        {
+            "label": "Frontend: Dev Server",
+            "type": "shell",
+            "command": "cd apps/web && npm run dev",
+            "problemMatcher": [],
+            "isBackground": true,
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated"
+            }
+        },
+        {
+            "label": "Frontend: Build",
+            "type": "shell",
+            "command": "cd apps/web && npm run build",
+            "group": "build",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        }
+    ]
+}

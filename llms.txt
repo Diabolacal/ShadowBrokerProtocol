@@ -1,0 +1,18 @@
+# Shadow Broker Protocol — Documentation Map
+
+> **Note to Agents**: This file serves as a high-level map to the most important documentation in this repository.
+> For agent guardrails, see `.github/copilot-instructions.md` and `AGENTS.md`.
+
+## Critical Entry Points
+- **Agent Rules**: `.github/copilot-instructions.md` (MUST READ)
+- **Agent Context**: `AGENTS.md` (MUST READ)
+- **Security**: `.github/security-guidelines.md`
+
+## Key Documentation
+- **Product Vision**: `docs/strategy/shadow-broker-product-vision.md`
+- **Technical Architecture**: `docs/strategy/shadow-broker-technical-architecture.md`
+- **Demo Beat Sheet**: `docs/strategy/shadow-broker-demo-beat-sheet.md`
+- **Validation Evidence**: `docs/strategy/shadow-broker-validation-evidence.md`
+- **Repo Conventions**: `docs/core/hackathon-repo-conventions.md`
+- **Decision Log**: `docs/decision-log.md`
+- **Working Memory Template**: `docs/core/memory.md`
