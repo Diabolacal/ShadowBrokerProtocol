@@ -4,7 +4,7 @@
 
 The Shadow Broker Protocol is a cryptographic intelligence marketplace for [EVE Frontier](https://www.evefrontier.com/) on Sui. Spies upload encrypted audio intelligence, set a price, and buyers purchase with cryptographic delivery guarantees — zero trust, zero middlemen, zero escrow.
 
-> **Network:** Sui Testnet | **Package ID:** `0xf37bd28ef8e67752168355525bc3d39dc9ff4275158d3cd1fb1abe020d3c5b8e`
+> **Network:** Stillness (EVE Frontier) | **Package ID:** `0xf37bd28ef8e67752168355525bc3d39dc9ff4275158d3cd1fb1abe020d3c5b8e`
 
 ---
 
@@ -96,7 +96,7 @@ See `docs/strategy/shadow-broker-validation-evidence.md` for full details and SD
 
 ## Status
 
-The MVP is implemented, published to Sui testnet, and **verified end-to-end in-game via EVE Frontier's Smart Storage Unit (SSU)**.
+The MVP is implemented, deployed on Stillness, and **verified end-to-end in-game via EVE Frontier's Smart Storage Unit (SSU)**.
 
 ### Completed
 
@@ -106,18 +106,18 @@ The MVP is implemented, published to Sui testnet, and **verified end-to-end in-g
 - [x] Seal integration (encrypt/decrypt)
 - [x] Audio teaser extraction (Web Audio API — first 2 seconds of real file)
 - [x] AES-256-GCM envelope encryption
-- [x] Published to Sui testnet
+- [x] Deployed on Stillness (validated on Sui testnet during development)
 - [x] EVE/Lux denomination model (CivilizationControl-aligned)
 - [x] Real EVE settlement (Stillness `Coin<EVE>`)
 - [x] In-game SSU E2E verified: upload → list → purchase → Seal decrypt → Walrus download → playback
 - [x] Player name resolution (Stillness-compatible)
 - [x] Dark covert UI theme (game-aesthetic, monospace, INTERCEPT badges, scanlines)
 
-### In Progress
+### Recently Completed
 
-- [ ] Demo audio asset (scripted player voice-chat — comms script finalized)
-- [ ] Demo recording (3-minute screencast — beat sheet and capture plan ready)
-- [ ] Production domain / Stillness deployment
+- [x] Demo audio asset (scripted player voice-chat)
+- [x] Demo video exported
+- [x] Stillness deployment
 
 ### Primary Access: In-Game SSU
 
@@ -127,8 +127,8 @@ The Shadow Broker Protocol is designed to operate **inside EVE Frontier** via Sm
 
 | Field | Value |
 |-------|-------|
-| **Network** | Sui Testnet |
-| **Package ID** | `0xf37bd28ef8e67752168355525bc3d39dc9ff4275158d3cd1fb1abe020d3c5b8e` |
+| **Network** | Stillness (EVE Frontier) — validated on Sui testnet during development |
+| **Stillness Package ID** | `0xf37bd28ef8e67752168355525bc3d39dc9ff4275158d3cd1fb1abe020d3c5b8e` |
 | **Settlement coin** | `0x2a66a89b5a735738ffa4423ac024d23571326163f324f9051557617319e59d60::EVE::EVE` |
 | **Economy** | Lux (display) / EVE (settlement) — 100 Lux = 1 EVE |
 | **Gas** | SUI (separate from settlement) |
@@ -142,7 +142,7 @@ The Shadow Broker Protocol is designed to operate **inside EVE Frontier** via Sm
 
 - [Sui CLI](https://docs.sui.io/guides/developer/getting-started/sui-install) installed
 - [Node.js](https://nodejs.org/) 20+
-- Sui testnet or localnet configured
+- Sui CLI configured (Stillness or testnet)
 
 ### Move Contracts
 

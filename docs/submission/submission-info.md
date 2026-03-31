@@ -25,7 +25,7 @@ The Shadow Broker Protocol lets spies sell encrypted audio intelligence to buyer
 |-------|-------|
 | **Repository** | https://github.com/Diabolacal/ShadowBrokerProtocol |
 | **Website / deploy URL** | `TODO` — production domain not yet finalized |
-| **Demo video URL** | `TODO` — recording pending (beat sheet and capture plan ready) |
+| **Demo video URL** | `TODO` — exported locally; public URL pending upload |
 | **Demo video path (local)** | `TODO` — will be `DEMO_FINAL_v#.mp4` per capture sheet convention |
 
 ---
@@ -34,8 +34,8 @@ The Shadow Broker Protocol lets spies sell encrypted audio intelligence to buyer
 
 | Field | Value |
 |-------|-------|
-| **Network** | Sui Testnet |
-| **Package ID** | `0xf37bd28ef8e67752168355525bc3d39dc9ff4275158d3cd1fb1abe020d3c5b8e` |
+| **Network** | Stillness (EVE Frontier) — validated on Sui testnet during development |
+| **Stillness Package ID** | `0xf37bd28ef8e67752168355525bc3d39dc9ff4275158d3cd1fb1abe020d3c5b8e` |
 | **Settlement coin type** | `0x2a66a89b5a735738ffa4423ac024d23571326163f324f9051557617319e59d60::EVE::EVE` |
 | **Denomination** | Lux (display) / EVE (settlement) — 100 Lux = 1 EVE = 10^9 base units |
 | **Gas token** | SUI (separate from settlement) |
@@ -96,11 +96,11 @@ See `docs/strategy/shadow-broker-validation-evidence.md` for full validation det
 |-------|-------|--------|
 | Project name | The Shadow Broker Protocol | ✅ Ready |
 | One-line description | Trustless intelligence marketplace for EVE Frontier — encrypted audio intel, atomic purchases, holder-only decryption | ✅ Ready |
-| Network | Sui Testnet | ✅ Ready |
-| Package ID | `0xf37bd28ef8e67752168355525bc3d39dc9ff4275158d3cd1fb1abe020d3c5b8e` | ✅ Ready |
+| Network | Stillness (EVE Frontier) | ✅ Ready |
+| Package ID | `0xf37bd28ef8e67752168355525bc3d39dc9ff4275158d3cd1fb1abe020d3c5b8e` (Stillness) | ✅ Ready |
 | Repository URL | https://github.com/Diabolacal/ShadowBrokerProtocol | ✅ Ready |
 | Website URL | `TODO` | ⏳ Pending |
-| Demo video URL | `TODO` | ⏳ Pending |
+| Demo video URL | `TODO` — exported locally, pending public upload | ⏳ Pending |
 | Team / author | `TODO` | ⏳ Confirm |
 | Discord / social | `TODO` | ⏳ If required |
 
@@ -110,20 +110,17 @@ See `docs/strategy/shadow-broker-validation-evidence.md` for full validation det
 
 | Field | Status |
 |-------|--------|
-| **Stillness deployment** | Not yet deployed — contracts are on Sui Testnet |
-| **Stillness package ID** | `TODO` — will need republish targeting Stillness |
-| **Settlement coin type** | Already wired for Stillness EVE: `0x2a66a89b5a735738ffa4423ac024d23571326163f324f9051557617319e59d60::EVE::EVE` |
-| **What still needs to happen** | Publish contracts to Stillness network, update `config.ts` package ID, verify E2E on Stillness |
+| **Stillness deployment** | ✅ Deployed — contracts published on Stillness |
+| **Stillness Package ID** | `0xf37bd28ef8e67752168355525bc3d39dc9ff4275158d3cd1fb1abe020d3c5b8e` |
+| **Settlement coin type** | Stillness EVE: `0x2a66a89b5a735738ffa4423ac024d23571326163f324f9051557617319e59d60::EVE::EVE` |
+| **E2E verification** | Full flow verified in-game via SSU |
 
 ---
 
 ## 9. Open Items Before Final Submission
 
-- [ ] **Production domain / DNS** — no public URL finalized
-- [ ] **Website deploy** — Cloudflare Pages templates exist but no active deployment found
-- [ ] **Demo video** — beat sheet and capture plan ready; recording + audio generation pending
+- [ ] **Website deploy** — no public URL finalized (Cloudflare Pages templates exist)
+- [ ] **Demo video upload** — video exported locally; host and link after upload
 - [ ] **Entry form copy** — use §1 and §4 above as starting material
 - [ ] **Discord announcement copy** — draft from §1 short paragraph
 - [ ] **Team / author field** — confirm for entry form
-- [ ] **Stillness deployment** — republish contracts if targeting Stillness network
-- [ ] **Demo video upload** — host and link after recording
