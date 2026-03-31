@@ -18,7 +18,7 @@ export function NavBar() {
             <span className="text-gray-100 font-mono font-bold text-base tracking-wide">
               SHADOW BROKER
             </span>
-            <span className="label-muted hidden sm:inline">PROTOCOL</span>
+            <span className="label-muted hidden sm:inline -translate-y-px">PROTOCOL</span>
           </Link>
           <div className="flex gap-6">
             {NAV_ITEMS.map((item) => (
