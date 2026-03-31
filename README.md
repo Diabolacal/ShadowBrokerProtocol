@@ -4,6 +4,19 @@
 
 The Shadow Broker Protocol is a cryptographic intelligence marketplace for [EVE Frontier](https://www.evefrontier.com/) on Sui. Spies upload encrypted audio intelligence, set a price, and buyers purchase with cryptographic delivery guarantees — zero trust, zero middlemen, zero escrow.
 
+> **Network:** Sui Testnet | **Package ID:** `0xf37bd28ef8e67752168355525bc3d39dc9ff4275158d3cd1fb1abe020d3c5b8e`
+
+---
+
+## What Judges Should Know
+
+- **Runs in-game** via EVE Frontier's Smart Storage Unit (SSU) — not just a standalone web app
+- **Tested end-to-end** in the target environment: upload → list → purchase → decrypt → play
+- **Teaser mechanic:** The 2-second preview is extracted from the first seconds of the real encrypted file, proving continuity and authenticity
+- **Atomic settlement:** Payment and NFT transfer happen in a single Sui Programmable Transaction Block — no escrow, no partial states
+- **Full decrypt is holder-gated:** Only the wallet that owns the IntelObject NFT can recover the decryption key via Seal threshold decryption
+- **Real EVE economy:** Purchases settle in EVE tokens (`Coin<EVE>` from Stillness), displayed in Lux — not SUI
+
 ---
 
 ## The Problem: Fair Exchange
@@ -83,28 +96,43 @@ See `docs/strategy/shadow-broker-validation-evidence.md` for full details and SD
 
 ## Status
 
-The MVP is implemented, deployed to Sui testnet, and **verified end-to-end in-game via EVE Frontier's Smart Storage Unit (SSU)**:
+The MVP is implemented, published to Sui testnet, and **verified end-to-end in-game via EVE Frontier's Smart Storage Unit (SSU)**.
+
+### Completed
 
 - [x] Move contracts (`intel_object`, `marketplace`) — 8/8 tests pass
 - [x] React frontend (Marketplace, Upload Intel, My Intel pages)
-- [x] Walrus integration (upload/download hooks)
-- [x] Seal integration (encrypt/decrypt hooks)
-- [x] Audio teaser extraction (Web Audio API)
-- [x] AES-256-GCM encryption utilities
+- [x] Walrus integration (upload/download)
+- [x] Seal integration (encrypt/decrypt)
+- [x] Audio teaser extraction (Web Audio API — first 2 seconds of real file)
+- [x] AES-256-GCM envelope encryption
 - [x] Published to Sui testnet
 - [x] EVE/Lux denomination model (CivilizationControl-aligned)
 - [x] Real EVE settlement (Stillness `Coin<EVE>`)
-- [x] In-game E2E verified: upload → list → purchase → Seal decrypt → Walrus download → playback
-- [ ] Demo recording (3-minute screencast)
-- [ ] Demo audio asset (scripted alliance comms)
+- [x] In-game SSU E2E verified: upload → list → purchase → Seal decrypt → Walrus download → playback
+- [x] Player name resolution (Stillness-compatible)
+- [x] Dark covert UI theme (game-aesthetic, monospace, INTERCEPT badges, scanlines)
+
+### In Progress
+
+- [ ] Demo audio asset (scripted player voice-chat — comms script finalized)
+- [ ] Demo recording (3-minute screencast — beat sheet and capture plan ready)
+- [ ] Production domain / Stillness deployment
 
 ### Primary Access: In-Game SSU
 
-The Shadow Broker Protocol is designed to operate **inside EVE Frontier** via Smart Storage Units. The in-game SSU environment provides the walrus/seal-compatible wallet signing that the full encrypt/decrypt pipeline requires. Browser wallet extensions (e.g., EveVault zkLogin) have known limitations with Seal's `verifyPersonalMessage` — the SSU path is the canonical, tested flow.
+The Shadow Broker Protocol is designed to operate **inside EVE Frontier** via Smart Storage Units. The in-game SSU environment provides the wallet signing that the full encrypt/decrypt pipeline requires. Browser wallet extensions (e.g., EveVault zkLogin) have known limitations with Seal's `verifyPersonalMessage` — the SSU path is the canonical, tested flow.
 
-**Package ID:** `0xf37bd28ef8e67752168355525bc3d39dc9ff4275158d3cd1fb1abe020d3c5b8e`
+### On-Chain Details
 
-> **Economy model:** Prices display in **Lux** (primary) with **EVE** (secondary). Purchases settle in **EVE tokens** (`Coin<EVE>` from the Stillness assets package), not SUI. Gas remains SUI. Buyers must hold EVE tokens in their wallet. The Move contract's `purchase<T>` is generic — the frontend wires the Stillness EVE coin type: `0x2a66a89b5a735738ffa4423ac024d23571326163f324f9051557617319e59d60::EVE::EVE`.
+| Field | Value |
+|-------|-------|
+| **Network** | Sui Testnet |
+| **Package ID** | `0xf37bd28ef8e67752168355525bc3d39dc9ff4275158d3cd1fb1abe020d3c5b8e` |
+| **Settlement coin** | `0x2a66a89b5a735738ffa4423ac024d23571326163f324f9051557617319e59d60::EVE::EVE` |
+| **Economy** | Lux (display) / EVE (settlement) — 100 Lux = 1 EVE |
+| **Gas** | SUI (separate from settlement) |
+| **Repository** | [github.com/Diabolacal/ShadowBrokerProtocol](https://github.com/Diabolacal/ShadowBrokerProtocol) |
 
 ---
 
@@ -157,7 +185,7 @@ These findings were discovered during validation and are essential for implement
 
 ## Hackathon Context
 
-This project targets the **EVE Frontier Hackathon** (March 11–31, 2026). Primary prize target: **Most Creative**. The combination of Sui + Walrus + Seal in a single project is unique across the portfolio — no other entry integrates the full Mysten Labs technology suite.
+This project targets the **EVE Frontier Hackathon** (March 11–31, 2026). The combination of Sui + Walrus + Seal in a single project is unique — no other entry integrates the full Mysten Labs technology suite into a single trustless exchange flow.
 
 ---
 

@@ -31,14 +31,14 @@ The demo builds **anticipation through denial** — but the teaser breaks the de
 |------|------|--------|-----------------|
 | 1.1 | 0:00 | Title card: "The Shadow Broker Protocol" | 3s fade-in, tagline: "Trustless intelligence for a lawless frontier" |
 | 1.2 | 0:03 | lacal's wallet connected, Upload Intel panel visible | `useDAppKit()` wallet connection, address shown truncated |
-| 1.3 | 0:07 | Narration: "An operative has intercepted alliance comms. A recording of rival leaders planning a raid on a fuel depot." | Show .mp3 file in system |
+| 1.3 | 0:07 | Narration: "An operative has intercepted alliance comms. A recording of players planning a raid on a fuel depot." | Show .mp3 file in system |
 | 1.4 | 0:12 | Spy drags audio file into upload zone | Client generates random AES-256-GCM key |
 | 1.5 | 0:15 | Progress bar: "Extracting preview…" | Web Audio API: `AudioContext.decodeAudioData()` → `AudioBuffer` → slice first 2 seconds → encode to MP3 blob. This is the unencrypted teaser clip. |
 | 1.6 | 0:18 | Narration: "A two-second teaser. Just enough to prove the content is real." | Teaser clip shown as small waveform thumbnail in the upload form |
 | 1.7 | 0:21 | Progress bar: "Uploading teaser…" | `@mysten/walrus` SDK: `uploadBlob(teaserClipBytes)` → returns `teaserBlobId` (unencrypted, publicly readable) |
 | 1.8 | 0:24 | Progress bar: "Encrypting and uploading intel…" | `crypto.subtle.encrypt()` AES-256-GCM on full audio → `@mysten/walrus` `uploadBlob(encryptedAudioBytes)` → returns `blobId` |
 | 1.9 | 0:30 | Progress bar: "Sealing encryption key…" | `@mysten/seal` SDK: `SealClient.encrypt({...})` — Seal-encrypts the AES key with policy: "owner of IntelObject NFT" |
-| 1.10 | 0:35 | Progress bar: "Minting IntelObject…" | PTB calls `shadow_broker::intel::mint_intel()` — creates IntelObject NFT containing: `blob_id`, `teaser_blob_id`, `encrypted_key`, metadata (`file_type: "audio/mpeg"`, `duration_seconds: {{INTEL_DURATION_SECS}}`, `file_size_bytes`, `description`) |
+| 1.10 | 0:35 | Progress bar: "Minting IntelObject…" | PTB calls `shadow_broker::intel::mint_intel()` — creates IntelObject NFT containing: `blob_id`, `teaser_blob_id`, `encrypted_key`, metadata (`file_type: "audio/mpeg"`, `duration_seconds: 39`, `file_size_bytes`, `description`) |
 | 1.11 | 0:42 | IntelObject appears in wallet inventory. Metadata card visible: audio icon, duration, file size, teaser badge. | Sui explorer link briefly shown for mint tx |
 | 1.12 | 0:48 | Narration: "The intel is sealed. Only the holder can unlock it." | Pause beat — let it land |
 
@@ -56,9 +56,9 @@ AES key → Seal encrypt (policy: IntelObject owner) → encrypted_key → on-ch
 | Beat | Time | Visual | Technical Detail |
 |------|------|--------|-----------------|
 | 2.1 | 0:48 | Spy clicks "List for Sale" on the IntelObject card | Navigate to listing form |
-| 2.2 | 0:53 | Spy sets price: {{PRICE_DISPLAY}}. Confirms listing. | Single PTB combining `shadow_broker::intel::update_encrypted_key()` + `shadow_broker::marketplace::list()` — one transaction transfers IntelObject into a shared `Listing` object with price field |
+| 2.2 | 0:53 | Spy sets price: 100,000 Lux. Confirms listing. | Single PTB combining `shadow_broker::intel::update_encrypted_key()` + `shadow_broker::marketplace::list()` — one transaction transfers IntelObject into a shared `Listing` object with price field |
 | 2.3 | 1:02 | Listing confirmation. Marketplace view shows the new listing. | Listing object ID shown, IntelObject now owned by Listing (wrapped or dynamic field) |
-| 2.4 | 1:08 | Camera lingers on listing card: "INTERCEPTED COMMS — Audio, {{INTEL_DURATION_DISPLAY}} — {{PRICE_DISPLAY}}." A small ▶ Play Preview button glows on the card with a waveform indicator beside it. | Metadata visible: file type, duration, description. Teaser button is public — anyone can play it. |
+| 2.4 | 1:08 | Camera lingers on listing card: "INTERCEPTED COMMS — Audio, 0:39 — 100,000 Lux." A small ▶ Play Preview button glows on the card with a waveform indicator beside it. | Metadata visible: file type, duration, description. Teaser button is public — anyone can play it. |
 | 2.5 | 1:14 | lacal clicks "Play Preview" on their own listing. Two seconds of voices play through the speakers. Players planning something. Urgency. Then silence. | Client fetches `teaserBlobId` from Walrus (unencrypted), decodes via `AudioContext.decodeAudioData()`, plays through `AudioBufferSourceNode`. Waveform visualization pulses for 2 seconds. |
 | 2.6 | 1:20 | Narration: "Two seconds. Just enough to hear something real. Not enough to know why it matters." | Camera holds on the silent waveform. The teaser has ended. |
 | 2.7 | 1:27 | Transition: wallet disconnect animation | Setup for buyer identity switch |
@@ -75,7 +75,7 @@ AES key → Seal encrypt (policy: IntelObject owner) → encrypted_key → on-ch
 | 3.4 | 1:47 | Buyer clicks ▶ Play Preview. The 2-second teaser plays. Camera holds tight on the waveform visualization. Voices, urgency, a location and a number. Two seconds. Then silence. | Same teaser fetch: Walrus `readBlob(teaserBlobId)` → decode → play. No decryption needed — teaser is public. |
 | 3.5 | 1:52 | Narration: "Two seconds of intercepted comms. Voices. Urgency. That's all you get. The rest is on the listing." | This is the PEAK tension moment. Proof of life. The buyer knows the content is real audio — but can't access the substance without paying. |
 | 3.6 | 1:58 | Buyer clicks "Purchase" | Single PTB constructed with 3 commands: |
-| | | | 1. Split payment coin for exact listing amount (`{{PRICE_BASE_UNITS}}`) |
+| | | | 1. Split payment coin for exact listing amount (`1000000000000`) |
 | | | | 2. `TransferObjects([coin], seller_address)` — payment to seller |
 | | | | 3. `marketplace::purchase_listing()` — transfers IntelObject to buyer |
 | 3.7 | 2:08 | Transaction confirmation. Full-screen moment. | Show Sui explorer: all 3 effects in one tx digest. Atomic. |
@@ -97,7 +97,7 @@ AES key → Seal encrypt (policy: IntelObject owner) → encrypted_key → on-ch
 | 4.3 | 2:36 | Progress: "Verifying ownership… Recovering key… Fetching intel…" | 5. `@mysten/walrus` `readBlob(blobId)` fetches encrypted audio |
 | | | | 6. Client AES-GCM decrypts with recovered key |
 | 4.4 | 2:42 | **Audio waveform appears. Sound plays.** Alliance leaders' voices fill the room. The same voices from the teaser — but now the full conversation unfolds. | `new AudioContext()`, `decodeAudioData()`, waveform canvas visualization |
-| 4.5 | 2:48 | Brief overlay appears while audio continues: "Preview: 2 seconds (public) / Full recording: {{INTEL_DURATION_DISPLAY}} (decrypted)" | Reinforces the mechanic visually. The teaser was the hook. This is the substance. |
+| 4.5 | 2:48 | Brief overlay appears while audio continues: "Preview: 2 seconds (public) / Full recording: 0:39 (decrypted)" | Reinforces the mechanic visually. The teaser was the hook. This is the substance. |
 | 4.6 | 2:52 | Camera holds on waveform + audio playing. No UI interaction. Let the moment breathe. | The payoff. Raw intelligence, decrypted, playing. |
 | 4.7 | 2:56 | Audio fades. Text overlay: **"Zero trust. Zero middlemen. The intelligence speaks for itself."** | 4s hold on closing card |
 
@@ -120,8 +120,8 @@ AES key → Seal encrypt (policy: IntelObject owner) → encrypted_key → on-ch
 - Full file must be ≤5 MB (Walrus upload speed matters for demo pacing). MP3 format — tested and verified in the encrypt/decrypt flow.
 
 **Duration tokens:**
-- `{{INTEL_DURATION_SECS}}` — actual master file length in seconds (set after final mix)
-- `{{INTEL_DURATION_DISPLAY}}` — human-readable display string (e.g., "0:42")
+- `duration_seconds`: **39** (actual master file length)
+- Display string: **0:39**
 - On-chain metadata must match the real file — do not inflate duration
 
 ## Fallback Plans

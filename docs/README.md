@@ -16,6 +16,11 @@
 | [intel-audio-script.md](strategy/intel-audio-script.md) | Canonical intercepted comms script + assembly plan |
 | [shadow-broker-validation-evidence.md](strategy/shadow-broker-validation-evidence.md) | Pre-hackathon validation results (Move, Walrus, Seal, E2E) |
 
+## Submission
+| Document | Purpose |
+|----------|---------|
+| [submission-info.md](submission/submission-info.md) | Submission-prep reference sheet (entry fields, package ID, links, copyable values) |
+
 ## Working Memory
 Ephemeral task-tracking files — gitignored. See `docs/core/memory.md` for template.
 
