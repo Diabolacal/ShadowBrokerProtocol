@@ -29,8 +29,8 @@
 | Voice | Role | Source | Processing |
 |-------|------|--------|------------|
 | **Narrator** | Demo voiceover — guides the viewer through the flow | 11Labs generation | Clean, slight reverb for presence |
-| **Comms Voice 1** | Raid lead — plans the SSU raid (Voice A) | 11Labs generation | Radio filter, compression, static bursts |
-| **Comms Voice 2** | Secondary pilot — confirms / readback (Voice B) | 11Labs generation (different voice) OR same voice pitch-shifted | Radio filter, walkie-talkie aesthetic |
+| **Comms Voice 1** | Raid lead — plans the SSU raid (Voice A) | 11Labs generation | Clean Discord voice-chat quality, light compression only |
+| **Comms Voice 2** | Secondary pilot — confirms / readback (Voice B) | 11Labs generation (different voice) OR same voice pitch-shifted | Clean Discord voice-chat quality, light compression only |
 
 ### Fallback: Single Comms Voice
 
@@ -47,7 +47,8 @@ If only one distinct 11Labs voice is available for comms:
 - Pre-op SSU raid planning, ~35–50 seconds mixed
 - Target: IMT-GV3, grid P5L2, over a million fuel
 - Two voices: raid lead (Voice A) + secondary pilot (Voice B)
-- Teaser hook (first 2s): `[static burst] "Target's IMT-GV3. P5L2. Over a million fuel—" [cut]`
+- Framing: recorded Discord / voice-chat conversation between players
+- Teaser hook (first 2s): `"Target's IMT-GV3. P5L2. Over a million fuel—" [cut]`
 - Generate each line separately via 11Labs, mix in post
 
 > See `intel-audio-script.md` for the full script, file naming, and assembly plan.
@@ -58,9 +59,10 @@ If only one distinct 11Labs voice is available for comms:
 
 - The teaser is the **first 2 seconds** of the full comms recording
 - It MUST be extracted from the same source file (proving continuity)
-- Teaser content: `[static burst] "Target's IMT-GV3. P5L2. Over a million fuel—" [cut]`
+- Teaser content: `"Target's IMT-GV3. P5L2. Over a million fuel—" [cut]`
 - Teaser is uploaded **unencrypted** to Walrus — publicly playable by anyone browsing the marketplace
 - The teaser creates the emotional hook: a real system, a real grid ref, a real number — then silence
+- No static burst or radio FX — the teaser starts with a voice speaking immediately
 
 ---
 
@@ -205,30 +207,21 @@ Step-by-step production path from script to final assets. This section makes the
 1. Open 11Labs → select comms voices (Voice A = raid lead, Voice B = secondary pilot)
 2. Generate each line from [`intel-audio-script.md` §5](intel-audio-script.md) — one file per line
 3. Export as MP3, name per the script: `COMMS_A_010_teaser-hook.mp3` through `COMMS_B_070_ping-ready.mp3`
-4. Processing at this stage: dry (no reverb, no FX). Radio filter and compression applied in the mix stage.
+4. Processing: clean Discord voice-chat quality — no radio filter, no static, no walkie-talkie FX
 5. If only one comms voice available: generate all lines, then pitch-shift one speaker ~3 semitones (see §B Fallback)
 
-### Step 3: Source or Create FX
-
-| File | Description | Source |
-|------|-------------|--------|
-| `FX_010_static-burst.mp3` | Opening static burst (0.3–0.5s) | Free SFX library or generate |
-| `FX_020_radio-hiss-bed.mp3` | Low continuous radio hiss (loop) | Free SFX library or generate |
-| `FX_030_signal-dropout.mp3` | Closing crackle + signal loss | Free SFX library or generate |
-
-### Step 4: Mix Comms Master
+### Step 3: Mix Comms Master
 
 1. Open Descript (or DAW)
 2. Follow the assembly plan in [`intel-audio-script.md` §6](intel-audio-script.md):
-   - Start with `FX_010_static-burst.mp3`
+   - Start directly with `COMMS_A_010_teaser-hook.mp3`
    - Sequence comms lines with ~0.3–0.5s gaps
-   - Layer `FX_020_radio-hiss-bed.mp3` underneath at low volume
-   - Apply radio filter / compression to all voice tracks
-   - End with `FX_030_signal-dropout.mp3`
+   - Apply light compression if needed for level consistency
+   - No radio filter, no hiss bed, no static — clean Discord-style conversation
 3. Export full mix → `ASSET_INTEL_FULL_master.mp3`
 4. Extract first 2 seconds → `ASSET_INTEL_TEASER_2s.mp3` (must cut mid-sentence after "Over a million fuel—")
 
-### Step 5: Verify
+### Step 4: Verify
 
 - [ ] `ASSET_INTEL_FULL_master.mp3` plays correctly, ≤5 MB
 - [ ] `ASSET_INTEL_TEASER_2s.mp3` is exactly the first 2 seconds of the master

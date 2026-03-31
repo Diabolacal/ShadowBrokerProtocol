@@ -59,7 +59,7 @@ AES key → Seal encrypt (policy: IntelObject owner) → encrypted_key → on-ch
 | 2.2 | 0:53 | Spy sets price: {{PRICE_DISPLAY}}. Confirms listing. | Single PTB combining `shadow_broker::intel::update_encrypted_key()` + `shadow_broker::marketplace::list()` — one transaction transfers IntelObject into a shared `Listing` object with price field |
 | 2.3 | 1:02 | Listing confirmation. Marketplace view shows the new listing. | Listing object ID shown, IntelObject now owned by Listing (wrapped or dynamic field) |
 | 2.4 | 1:08 | Camera lingers on listing card: "INTERCEPTED COMMS — Audio, {{INTEL_DURATION_DISPLAY}} — {{PRICE_DISPLAY}}." A small ▶ Play Preview button glows on the card with a waveform indicator beside it. | Metadata visible: file type, duration, description. Teaser button is public — anyone can play it. |
-| 2.5 | 1:14 | lacal clicks "Play Preview" on their own listing. Two seconds of scratchy, radio-filtered voices play through the speakers. Static. Urgency. Then silence. | Client fetches `teaserBlobId` from Walrus (unencrypted), decodes via `AudioContext.decodeAudioData()`, plays through `AudioBufferSourceNode`. Waveform visualization pulses for 2 seconds. |
+| 2.5 | 1:14 | lacal clicks "Play Preview" on their own listing. Two seconds of voices play through the speakers. Players planning something. Urgency. Then silence. | Client fetches `teaserBlobId` from Walrus (unencrypted), decodes via `AudioContext.decodeAudioData()`, plays through `AudioBufferSourceNode`. Waveform visualization pulses for 2 seconds. |
 | 2.6 | 1:20 | Narration: "Two seconds. Just enough to hear something real. Not enough to know why it matters." | Camera holds on the silent waveform. The teaser has ended. |
 | 2.7 | 1:27 | Transition: wallet disconnect animation | Setup for buyer identity switch |
 
@@ -72,7 +72,7 @@ AES key → Seal encrypt (policy: IntelObject owner) → encrypted_key → on-ch
 | 3.1 | 1:30 | Vifrevaert's wallet connects. Marketplace loads. | Different identity, different address. Balance visible. |
 | 3.2 | 1:37 | Buyer browses listings, clicks into the intercepted comms listing | Listing detail view: metadata, price, seller address (truncated). ▶ Play Preview button visible. |
 | 3.3 | 1:42 | Narration: "The listing says audio. Intercepted comms. Alliance raid planning." | Buyer is reading the metadata. Scanning. |
-| 3.4 | 1:47 | Buyer clicks ▶ Play Preview. The 2-second teaser plays. Camera holds tight on the waveform visualization. Scratchy voices, urgency, static. Two seconds. Then silence. | Same teaser fetch: Walrus `readBlob(teaserBlobId)` → decode → play. No decryption needed — teaser is public. |
+| 3.4 | 1:47 | Buyer clicks ▶ Play Preview. The 2-second teaser plays. Camera holds tight on the waveform visualization. Voices, urgency, a location and a number. Two seconds. Then silence. | Same teaser fetch: Walrus `readBlob(teaserBlobId)` → decode → play. No decryption needed — teaser is public. |
 | 3.5 | 1:52 | Narration: "Two seconds of intercepted comms. Voices. Urgency. That's all you get. The rest is on the listing." | This is the PEAK tension moment. Proof of life. The buyer knows the content is real audio — but can't access the substance without paying. |
 | 3.6 | 1:58 | Buyer clicks "Purchase" | Single PTB constructed with 3 commands: |
 | | | | 1. Split payment coin for exact listing amount (`{{PRICE_BASE_UNITS}}`) |
@@ -109,14 +109,14 @@ AES key → Seal encrypt (policy: IntelObject owner) → encrypted_key → on-ch
 
 **Teaser clip (first 2 seconds):**
 - MUST be the first 2 seconds of the same recording (proving continuity with the full file)
-- Contains the most evocative fragment — a static burst, a system name, a grid reference, and the start of a number
-- Teaser content: `[static burst] "Target's IMT-GV3. P5L2. Over a million fuel—" [cut]`
+- Contains the most evocative fragment — a system name, a grid reference, and the start of a number
+- Teaser content: `"Target's IMT-GV3. P5L2. Over a million fuel—" [cut]`
 - The teaser is a HOOK. It must make the buyer NEED to hear the rest.
 
 **Full recording (~35–50 seconds):**
 - Pre-op raid planning between two voices — see `intel-audio-script.md` for the canonical script
 - Opens with the same words as the teaser, then continues into target details, fleet composition, staging, and contingency planning
-- Post-process: radio filter, compression, walkie-talkie aesthetic, low hiss bed
+- Post-process: light compression for level consistency only — clean Discord voice-chat quality, no radio filter or FX
 - Full file must be ≤5 MB (Walrus upload speed matters for demo pacing). MP3 format — tested and verified in the encrypt/decrypt flow.
 
 **Duration tokens:**

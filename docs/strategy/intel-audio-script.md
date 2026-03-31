@@ -10,7 +10,7 @@
 This is the publicly previewable clip on the marketplace listing. It must function as a hook — proof that the content is real, specific, and worth buying.
 
 ```
-[static burst] "Target's IMT-GV3. P5L2. Over a million fuel—" [cut]
+"Target's IMT-GV3. P5L2. Over a million fuel—" [cut]
 ```
 
 - Extracted from the first 2 seconds of the full recording
@@ -21,11 +21,9 @@ This is the publicly previewable clip on the marketplace listing. It must functi
 
 ## 2. Full Comms Script
 
-Pre-op raid planning. Two voices. Clipped, functional, no theatrics.
+Pre-op raid planning. Two players in a Discord voice channel. Clipped, functional, no theatrics.
 
 ```
-[static burst, low radio hiss fades in underneath]
-
 VOICE 1:  "Target's IMT-GV3. P5L2. Over a million fuel in the SSU,
            plus packaged materials."
 
@@ -50,7 +48,7 @@ VOICE 1:  "One jump out. Hold until everyone's in. We hit IMT-GV3
 VOICE 2:  "Copy. IMT-GV3, P5L2, Friday evening. Two MAULs,
            two CHUMAQs. I'll have pilots ready."
 
-[brief pause, low hiss continues]
+[brief pause]
 
 VOICE 1:  "Keep the CHUMAQs in a safe until the grid's clean.
            I don't want them landing early."
@@ -66,8 +64,6 @@ VOICE 1:  "Yeah. Eyes one jump out. If he shouts, we bounce
            and reset."
 
 VOICE 2:  "Understood. I'll have the ping ready."
-
-[brief crackle, signal dropout, silence]
 ```
 
 ---
@@ -98,15 +94,16 @@ Generate each spoken line as a separate audio file, then mix into one master ass
 
 | Voice | Character | Tone |
 |-------|-----------|------|
-| **Voice A** | Raid lead / planner | Calm, authoritative, concise |
-| **Voice B** | Secondary pilot / confirming | Shorter lines, readback cadence |
+| **Voice A** | Raid lead / planner | Calm, authoritative, concise — sounds like a player who's done this before |
+| **Voice B** | Secondary pilot / confirming | Shorter lines, readback cadence — slightly less sure, confirming details |
 
 ### Generation rules
 
 - Generate one line per file via 11Labs
 - Do NOT generate the entire script as a single prompt — timing and pacing will be wrong
-- Keep each line dry (no added reverb or FX at generation time)
-- Post-processing (radio filter, compression, static) happens in the mix stage
+- Keep each line clean and natural — Discord voice-chat quality, not theatrical
+- No radio filter, no static, no walkie-talkie FX — this is a recorded Discord conversation
+- Light compression in the mix stage is fine if it helps consistency, but no dramatic processing
 - The narrator voice is a completely separate asset and does not appear in this file
 
 ---
@@ -132,14 +129,6 @@ Generate each spoken line as a separate audio file, then mix into one master ass
 | `COMMS_A_070_eyes-out.mp3` | A | "Yeah. Eyes one jump out…" |
 | `COMMS_B_070_ping-ready.mp3` | B | "Understood. I'll have the ping ready." |
 
-### Sound effects
-
-| Filename | Description |
-|----------|-------------|
-| `FX_010_static-burst.mp3` | Opening static burst (0.3–0.5s) |
-| `FX_020_radio-hiss-bed.mp3` | Low continuous radio hiss (loop/extend as needed) |
-| `FX_030_signal-dropout.mp3` | Closing crackle + signal loss |
-
 ### Final assets
 
 | Filename | Description |
@@ -151,14 +140,11 @@ Generate each spoken line as a separate audio file, then mix into one master ass
 
 ## 6. Assembly Plan
 
-1. **Open** with `FX_010_static-burst.mp3` (~0.3s)
-2. **Immediately** begin `COMMS_A_010_teaser-hook.mp3` — Voice A's first line starts right after the static burst
-3. **Layer** `FX_020_radio-hiss-bed.mp3` underneath the entire recording at low volume
-4. **Sequence** remaining lines with natural conversational gaps (~0.3–0.5s between speakers)
-5. **Apply** radio filter / compression to all voice tracks (walkie-talkie aesthetic)
-6. **End** with `FX_030_signal-dropout.mp3` — brief crackle then silence
-7. **Export** the full mix as `ASSET_INTEL_FULL_master.mp3`
-8. **Extract** the first 2 seconds as `ASSET_INTEL_TEASER_2s.mp3` — this must cut mid-sentence after "Over a million fuel—"
+1. **Start** with `COMMS_A_010_teaser-hook.mp3` — Voice A's first line begins the recording immediately
+2. **Sequence** remaining lines with natural conversational gaps (~0.3–0.5s between speakers)
+3. **Apply** light compression if needed for level consistency — no radio filter, no FX
+4. **Export** the full mix as `ASSET_INTEL_FULL_master.mp3`
+5. **Extract** the first 2 seconds as `ASSET_INTEL_TEASER_2s.mp3` — this must cut mid-sentence after "Over a million fuel—"
 
 **Critical:** The teaser is a slice of the master, not a separately generated file. Continuity between teaser and full recording is the proof-of-authenticity mechanic.
 
@@ -166,7 +152,7 @@ Generate each spoken line as a separate audio file, then mix into one master ass
 
 ## 7. Duration Guidance
 
-- Target full asset duration: **~35–50 seconds** of real spoken content + FX
+- Target full asset duration: **~35–50 seconds** of real spoken content
 - The recording naturally breaks into two halves:
   - **First half (~20s):** High-value actionable intel — target, value, timing, composition, execution plan
   - **Second half (~15–25s):** Lower-value logistics/contingency chatter — CHUMAQ hold, pilot confirmation, scout plan
@@ -182,15 +168,17 @@ Generate each spoken line as a separate audio file, then mix into one master ass
 
 ### Do
 
-- Sound like advance planning — this is a pre-op briefing
-- Keep it terse and functional
+- Sound like two players planning in a Discord voice channel — casual but focused
+- Keep it terse and functional — this is pre-op coordination, not a performance
 - Keep it specific — real system name, real grid ref, real ship classes, real cargo type
 - Keep it actionable — a listener can act on this information
+- Sound natural and believable — the kind of conversation that actually happens in gaming voice chat
 
 ### Don't
 
-- Sound like the attack is already underway
+- Sound like military radio comms or cinematic intercepts
+- Use radio FX, static bursts, or walkie-talkie processing
 - Use generic sci-fi filler ("shields failing!", "we're taking fire!")
 - Over-explain or repeat information unnecessarily
 - Turn it into theatrical movie dialogue
-- Add dramatic pauses or emotional delivery — these are professionals
+- Add dramatic pauses or emotional delivery — these are players, not actors
