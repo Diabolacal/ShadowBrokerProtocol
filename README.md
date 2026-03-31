@@ -2,7 +2,7 @@
 
 **Trustless intelligence trading for a lawless frontier.**
 
-The Shadow Broker Protocol is a cryptographic intelligence marketplace for [EVE Frontier](https://www.evefrontier.com/) on Sui. Spies upload encrypted audio intelligence, set a price, and buyers purchase with cryptographic delivery guarantees — zero trust, zero middlemen, zero escrow.
+The Shadow Broker Protocol is a cryptographic intelligence marketplace for [EVE Frontier](https://www.evefrontier.com/) on Sui. Spies upload encrypted audio intelligence, set a price, and buyers purchase with cryptographic delivery guarantees. Zero trust, zero middlemen, zero escrow.
 
 > **Network:** Stillness (EVE Frontier) | **Package ID:** `0xf37bd28ef8e67752168355525bc3d39dc9ff4275158d3cd1fb1abe020d3c5b8e`
 
@@ -10,18 +10,18 @@ The Shadow Broker Protocol is a cryptographic intelligence marketplace for [EVE 
 
 ## What Judges Should Know
 
-- **Runs in-game** via EVE Frontier's Smart Storage Unit (SSU) — not just a standalone web app
+- **Runs in-game** via EVE Frontier's Smart Storage Unit (SSU), not just a standalone web app
 - **Tested end-to-end** in the target environment: upload → list → purchase → decrypt → play
 - **Teaser mechanic:** The 2-second preview is extracted from the first seconds of the real encrypted file, proving continuity and authenticity
-- **Atomic settlement:** Payment and NFT transfer happen in a single Sui Programmable Transaction Block — no escrow, no partial states
+- **Atomic settlement:** Payment and NFT transfer happen in a single Sui Programmable Transaction Block. No escrow, no partial states
 - **Full decrypt is holder-gated:** Only the wallet that owns the IntelObject NFT can recover the decryption key via Seal threshold decryption
-- **Real EVE economy:** Purchases settle in EVE tokens (`Coin<EVE>` from Stillness), displayed in Lux — not SUI
+- **Real EVE economy:** Purchases settle in EVE tokens (`Coin<EVE>` from Stillness), displayed in Lux, not SUI
 
 ---
 
 ## The Problem: Fair Exchange
 
-Corporate espionage is EVE's most celebrated metagame. Spies acquire valuable intel — fleet positions, alliance comms recordings, staging coordinates — but have no trustless way to sell it:
+Corporate espionage is EVE's most celebrated metagame. Spies acquire valuable intel (fleet positions, alliance comms recordings, staging coordinates) but have no trustless way to sell it:
 
 1. **Spy sends first → buyer doesn't pay.** No leverage after disclosure.
 2. **Buyer pays first → spy sends garbage.** No recourse after payment.
@@ -36,8 +36,8 @@ The Shadow Broker Protocol solves this with three Mysten Labs technologies worki
 | Layer | Technology | Role |
 |-------|-----------|------|
 | **Storage** | [Walrus](https://docs.wal.app/) | Decentralized blob storage for encrypted audio + unencrypted 2-second teaser clips |
-| **Encryption** | [Seal](https://seal-docs.wal.app/) | Threshold encryption — only the NFT holder can decrypt |
-| **Exchange** | [Sui PTB](https://docs.sui.io/) | Atomic swap — payment and NFT transfer in a single transaction |
+| **Encryption** | [Seal](https://seal-docs.wal.app/) | Threshold encryption; only the NFT holder can decrypt |
+| **Exchange** | [Sui PTB](https://docs.sui.io/) | Atomic swap: payment and NFT transfer in a single transaction |
 
 ### Data Flow
 
@@ -49,7 +49,7 @@ BUYER: Browse listings → play 2-second teaser (proof of life) → purchase (at
        → Seal-decrypt AES key → download from Walrus → AES-decrypt → play full recording
 ```
 
-The **audio teaser** is the key UX innovation: buyers hear two seconds of real intercepted comms — enough to know the content is genuine, but not enough to learn anything useful — before committing funds.
+The **audio teaser** is the key UX innovation: buyers hear two seconds of real intercepted comms, enough to know the content is genuine but not enough to learn anything useful, before committing funds.
 
 ---
 
@@ -100,11 +100,11 @@ The MVP is implemented, deployed on Stillness, and **verified end-to-end in-game
 
 ### Completed
 
-- [x] Move contracts (`intel_object`, `marketplace`) — 8/8 tests pass
+- [x] Move contracts (`intel_object`, `marketplace`): 8/8 tests pass
 - [x] React frontend (Marketplace, Upload Intel, My Intel pages)
 - [x] Walrus integration (upload/download)
 - [x] Seal integration (encrypt/decrypt)
-- [x] Audio teaser extraction (Web Audio API — first 2 seconds of real file)
+- [x] Audio teaser extraction (Web Audio API, first 2 seconds of real file)
 - [x] AES-256-GCM envelope encryption
 - [x] Deployed on Stillness (validated on Sui testnet during development)
 - [x] EVE/Lux denomination model (CivilizationControl-aligned)
@@ -121,16 +121,16 @@ The MVP is implemented, deployed on Stillness, and **verified end-to-end in-game
 
 ### Primary Access: In-Game SSU
 
-The Shadow Broker Protocol is designed to operate **inside EVE Frontier** via Smart Storage Units. The in-game SSU environment provides the wallet signing that the full encrypt/decrypt pipeline requires. Browser wallet extensions (e.g., EveVault zkLogin) have known limitations with Seal's `verifyPersonalMessage` — the SSU path is the canonical, tested flow.
+The Shadow Broker Protocol is designed to operate **inside EVE Frontier** via Smart Storage Units. The full encrypt/decrypt pipeline has been verified end-to-end in the SSU environment. Out-of-game browser wallets (e.g., EveVault zkLogin) are not a supported decrypt path today due to a known Seal `verifyPersonalMessage` signing limitation. The in-game SSU is the canonical, tested flow.
 
 ### On-Chain Details
 
 | Field | Value |
 |-------|-------|
-| **Network** | Stillness (EVE Frontier) — validated on Sui testnet during development |
+| **Network** | Stillness (EVE Frontier). Validated on Sui testnet during development |
 | **Stillness Package ID** | `0xf37bd28ef8e67752168355525bc3d39dc9ff4275158d3cd1fb1abe020d3c5b8e` |
 | **Settlement coin** | `0x2a66a89b5a735738ffa4423ac024d23571326163f324f9051557617319e59d60::EVE::EVE` |
-| **Economy** | Lux (display) / EVE (settlement) — 100 Lux = 1 EVE |
+| **Economy** | Lux (display) / EVE (settlement). 100 Lux = 1 EVE |
 | **Gas** | SUI (separate from settlement) |
 | **Repository** | [github.com/Diabolacal/ShadowBrokerProtocol](https://github.com/Diabolacal/ShadowBrokerProtocol) |
 
@@ -164,10 +164,10 @@ npm run build   # Production build
 
 ## Key Technical Decisions
 
-- **Standalone marketplace** — no world-contracts / EVE SSU dependency. The project's value is the Mysten Trinity, not world-contracts integration.
-- **Envelope encryption** — AES-encrypt content locally, Seal-encrypt only the AES key. Performant for any file size.
-- **2-transaction seller flow** — TX1: mint (get object ID), TX2: update sealed key + list (single PTB). Decouples minting from Seal encryption.
-- **Audio teaser** — 2-second unencrypted clip on Walrus provides proof-of-life without revealing substance.
+- **Standalone marketplace.** No world-contracts / EVE SSU dependency. The project's value is the Mysten Trinity, not world-contracts integration.
+- **Envelope encryption.** AES-encrypt content locally, Seal-encrypt only the AES key. Performant for any file size.
+- **2-transaction seller flow.** TX1: mint (get object ID). TX2: update sealed key + list (single PTB). Decouples minting from Seal encryption.
+- **Audio teaser.** 2-second unencrypted clip on Walrus provides proof-of-life without revealing substance.
 
 ---
 
@@ -175,20 +175,26 @@ npm run build   # Production build
 
 These findings were discovered during validation and are essential for implementation:
 
-- **Seal decrypt PTB:** Must use `tx.build({ client, onlyTransactionKind: true })` — default `build()` causes "Invalid PTB: Invalid BCS" from key servers
-- **WalrusClient constructor:** Requires `{ network, suiClient, packageConfig }` — not just a URL
-- **WAL tokens:** Walrus uploads require WAL tokens — exchange SUI→WAL via `wal_exchange::exchange_all_for_wal`
-- **SealClient constructor:** Uses `serverConfigs: [{ objectId, weight }]` — NOT `serverObjectIds`
+- **Seal decrypt PTB:** Must use `tx.build({ client, onlyTransactionKind: true })`. Default `build()` causes "Invalid PTB: Invalid BCS" from key servers
+- **WalrusClient constructor:** Requires `{ network, suiClient, packageConfig }`, not just a URL
+- **WAL tokens:** Walrus uploads require WAL tokens. Exchange SUI→WAL via `wal_exchange::exchange_all_for_wal`
+- **SealClient constructor:** Uses `serverConfigs: [{ objectId, weight }]`, NOT `serverObjectIds`
 - **Session key signing:** `keypair.signPersonalMessage(sessionKey.getPersonalMessage())` → `sessionKey.setPersonalMessageSignature(signature)`
 
 ---
 
 ## Hackathon Context
 
-This project targets the **EVE Frontier Hackathon** (March 11–31, 2026). The combination of Sui + Walrus + Seal in a single project is unique — no other entry integrates the full Mysten Labs technology suite into a single trustless exchange flow.
+This project targets the **EVE Frontier Hackathon** (March 11-31, 2026). It brings Sui, Walrus, and Seal together in a single trustless exchange flow for EVE Frontier.
+
+---
+
+## Beyond Audio
+
+The current demo focuses on audio intelligence, but the same Walrus + Seal + on-chain delivery pattern works for any media or intel artifact. Screenshots, documents, route maps, or any file a spy can capture could be sold through the same trustless flow with minimal contract changes.
 
 ---
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT. See [LICENSE](LICENSE).
