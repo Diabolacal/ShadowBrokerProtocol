@@ -30,11 +30,15 @@ build/
 *.tgz
 .npm
 .eslintcache
+*.tsbuildinfo
 
 # Sui Move build artifacts
 contracts/*/build/
 contracts/*/.coverage_map.mvcov
 contracts/*/.trace
+
+# Branding reference files (not part of the app, excluded from tsconfig)
+apps/web/src/branding/
 
 # Python (if applicable)
 __pycache__/

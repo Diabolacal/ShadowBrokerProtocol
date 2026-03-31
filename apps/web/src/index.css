@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-broker-bg text-gray-200 antialiased;
+}
+
+/* Muted label utility — for contextual badges, not CTAs */
+.label-muted {
+  @apply uppercase tracking-widest text-[10px] font-mono text-broker-muted border border-broker-border px-1.5 py-0.5;
+}
+
+/* Accent glow — restrained, for playing/active states only */
+.glow-accent {
+  box-shadow: 0 0 8px rgba(232, 119, 46, 0.12);
+}
+
+/* Pulsing border for active playback */
+@keyframes border-pulse {
+  0%, 100% { border-color: #e8772e; }
+  50% { border-color: rgba(232, 119, 46, 0.4); }
+}
+.border-pulse {
+  animation: border-pulse 2s ease-in-out infinite;
+}

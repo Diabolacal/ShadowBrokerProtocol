@@ -81,15 +81,30 @@ See `docs/strategy/shadow-broker-validation-evidence.md` for full details and SD
 
 ---
 
-## What Remains to Build
+## Status
 
-- [ ] Production Move contracts in `contracts/shadow_broker/`
-- [ ] React frontend (Upload, Marketplace, My Intel pages)
-- [ ] Walrus integration (upload/download hooks)
-- [ ] Seal integration (encrypt/decrypt hooks)
-- [ ] Audio teaser extraction (Web Audio API)
+The MVP is implemented, deployed to Sui testnet, and **verified end-to-end in-game via EVE Frontier's Smart Storage Unit (SSU)**:
+
+- [x] Move contracts (`intel_object`, `marketplace`) — 8/8 tests pass
+- [x] React frontend (Marketplace, Upload Intel, My Intel pages)
+- [x] Walrus integration (upload/download hooks)
+- [x] Seal integration (encrypt/decrypt hooks)
+- [x] Audio teaser extraction (Web Audio API)
+- [x] AES-256-GCM encryption utilities
+- [x] Published to Sui testnet
+- [x] EVE/Lux denomination model (CivilizationControl-aligned)
+- [x] Real EVE settlement (Stillness `Coin<EVE>`)
+- [x] In-game E2E verified: upload → list → purchase → Seal decrypt → Walrus download → playback
 - [ ] Demo recording (3-minute screencast)
 - [ ] Demo audio asset (scripted alliance comms)
+
+### Primary Access: In-Game SSU
+
+The Shadow Broker Protocol is designed to operate **inside EVE Frontier** via Smart Storage Units. The in-game SSU environment provides the walrus/seal-compatible wallet signing that the full encrypt/decrypt pipeline requires. Browser wallet extensions (e.g., EveVault zkLogin) have known limitations with Seal's `verifyPersonalMessage` — the SSU path is the canonical, tested flow.
+
+**Package ID:** `0xf37bd28ef8e67752168355525bc3d39dc9ff4275158d3cd1fb1abe020d3c5b8e`
+
+> **Economy model:** Prices display in **Lux** (primary) with **EVE** (secondary). Purchases settle in **EVE tokens** (`Coin<EVE>` from the Stillness assets package), not SUI. Gas remains SUI. Buyers must hold EVE tokens in their wallet. The Move contract's `purchase<T>` is generic — the frontend wires the Stillness EVE coin type: `0x2a66a89b5a735738ffa4423ac024d23571326163f324f9051557617319e59d60::EVE::EVE`.
 
 ---
 
@@ -106,7 +121,6 @@ See `docs/strategy/shadow-broker-validation-evidence.md` for full details and SD
 ```bash
 sui move build --path contracts/shadow_broker
 sui move test --path contracts/shadow_broker
-sui client publish --path contracts/shadow_broker
 ```
 
 ### Frontend
@@ -114,7 +128,8 @@ sui client publish --path contracts/shadow_broker
 ```bash
 cd apps/web
 npm install
-npm run dev
+npm run dev     # Dev server at http://localhost:5173
+npm run build   # Production build
 ```
 
 ---
