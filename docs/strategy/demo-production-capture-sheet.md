@@ -106,22 +106,24 @@ All raw and generated assets use **descriptive, sortable** names: `TYPE_ROLE_###
 The 3-digit number sets timeline order (use 010/020/030 gaps for inserts). The slug describes content.
 
 ### Voice Assets — Narrator
-| Filename | Beat | Description |
+| Filename | Beat | Spoken Line |
 |----------|------|-------------|
-| `VO_NARR_010_title.wav` | 1.3 | "An operative has intercepted…" |
-| `VO_NARR_020_teaser-proof.wav` | 1.6 | "A two-second teaser…" |
-| `VO_NARR_030_sealed.wav` | 1.12 | "The intel is sealed…" |
-| `VO_NARR_040_two-seconds.wav` | 2.6 | "Two seconds. Just enough…" |
-| `VO_NARR_050_buyer-scan.wav` | 3.3 | "The listing says audio…" |
-| `VO_NARR_060_teaser-tension.wav` | 3.5 | "Two seconds of intercepted comms…" |
-| `VO_NARR_070_atomic-purchase.wav` | 3.9 | "Coins left. Intelligence arrived…" |
+| `VO_NARR_010_title.mp3` | 1.3 | "An operative has intercepted alliance comms. A recording of rival leaders planning a raid on a fuel depot." |
+| `VO_NARR_020_teaser-proof.mp3` | 1.6 | "A two-second teaser. Just enough to prove the content is real." |
+| `VO_NARR_030_sealed.mp3` | 1.12 | "The intel is sealed. Only the holder can unlock it." |
+| `VO_NARR_040_two-seconds.mp3` | 2.6 | "Two seconds. Just enough to hear something real. Not enough to know why it matters." |
+| `VO_NARR_050_buyer-scan.mp3` | 3.3 | "The listing says audio. Intercepted comms. Alliance raid planning." |
+| `VO_NARR_060_teaser-tension.mp3` | 3.5 | "Two seconds of intercepted comms. Voices. Urgency. That's all you get. The rest is on the listing." |
+| `VO_NARR_070_atomic-purchase.mp3` | 3.9 | "Coins left. Intelligence arrived. One transaction." |
+
+> **Note:** Beat 4.7 ("Zero trust. Zero middlemen. The intelligence speaks for itself.") is a text overlay only — it is NOT narrated.
 
 ### Voice Assets — Comms (intercepted recording)
 | Filename | Description |
 |----------|-------------|
 | See [`intel-audio-script.md` §5](intel-audio-script.md) | Full per-line file naming for all COMMS_A / COMMS_B lines |
-| `ASSET_INTEL_FULL_master.wav` | Mixed-down full comms recording (~35–50s, uploaded to Walrus) |
-| `ASSET_INTEL_TEASER_2s.wav` | First 2 seconds extracted from FULL (teaser clip) |
+| `ASSET_INTEL_FULL_master.mp3` | Mixed-down full comms recording (~35–50s, uploaded to Walrus) |
+| `ASSET_INTEL_TEASER_2s.mp3` | First 2 seconds extracted from FULL (teaser clip) |
 
 ### Screen Captures
 | Filename | Session | Beat | Description |
@@ -164,13 +166,13 @@ Master tracking table — fill in filenames as assets are produced.
 | 1.4–1.11 | 0:12–0:48 | lacal | `CAP_LACAL_010_upload` | `VO_NARR_020_teaser-proof`, `VO_NARR_030_sealed` | `OVR_DIAGRAM` | Upload → Mint flow |
 | 2.1–2.3 | 0:48–1:02 | lacal | `CAP_LACAL_020_list` | — | — | List for sale |
 | 2.4–2.5 | 1:08–1:14 | lacal | `CAP_LACAL_030_preview` | `ASSET_INTEL_TEASER_2s` (in-app) | — | Play Preview |
-| 2.6 | 1:20 | lacal | `CAP_LACAL_030_preview` | `VO_NARR_040_two-seconds` | — | "Two seconds…" |
+| 2.6 | 1:20 | lacal | `CAP_LACAL_030_preview` | `VO_NARR_040_two-seconds` | — | "Two seconds. Just enough…" |
 | 2.7 | 1:27 | lacal | `CAP_LACAL_040_disconnect` | — | — | Disconnect transition |
 | 3.1 | 1:30 | Vifrevaert | `CAP_VIF_010_browse` | — | — | Wallet connects |
-| 3.2–3.3 | 1:37–1:42 | Vifrevaert | `CAP_VIF_010_browse` | `VO_NARR_050_buyer-scan` | — | Browse listings |
+| 3.2–3.3 | 1:37–1:42 | Vifrevaert | `CAP_VIF_010_browse` | `VO_NARR_050_buyer-scan` | — | "The listing says audio…" |
 | 3.4 | 1:47 | Vifrevaert | `CAP_VIF_020_preview` | `ASSET_INTEL_TEASER_2s` (in-app) | — | Play Preview as buyer |
 | 3.5 | 1:52 | Vifrevaert | `CAP_VIF_020_preview` | `VO_NARR_060_teaser-tension` | — | "Two seconds of intercepted…" |
-| 3.6–3.8 | 1:58–2:20 | Vifrevaert | `CAP_VIF_030_purchase` | `VO_NARR_070_atomic-purchase` | `OVR_TX_020_purchase` | Purchase + confirmation |
+| 3.6–3.8 | 1:58–2:20 | Vifrevaert | `CAP_VIF_030_purchase` | `VO_NARR_070_atomic-purchase` | `OVR_TX_020_purchase` | "Coins left. Intelligence arrived…" |
 | 4.1–4.4 | 2:25–2:42 | Vifrevaert | `CAP_VIF_040_decrypt-play` | `ASSET_INTEL_FULL_master` (in-app) | — | **Decrypt & Play** |
 | 4.5–4.6 | 2:48–2:52 | Vifrevaert | `CAP_VIF_040_decrypt-play` | — | — | Waveform hold |
 | 4.7 | 2:56 | — | — | — | `OVR_CLOSING` | Closing card, 4s hold |
@@ -187,7 +189,56 @@ Master tracking table — fill in filenames as assets are produced.
 
 ---
 
-## H. Open Variables
+## H. Audio Generation Workflow
+
+Step-by-step production path from script to final assets. This section makes the capture sheet self-sufficient for audio generation — no need to cross-reference other docs.
+
+### Step 1: Generate Narrator Lines
+
+1. Open 11Labs → select narrator voice
+2. Generate each line from the **Voice Assets — Narrator** table above (§E) — one file per line
+3. Export as MP3, name per the table: `VO_NARR_010_title.mp3` through `VO_NARR_070_atomic-purchase.mp3`
+4. Processing: clean delivery, slight reverb for presence — no radio filter
+
+### Step 2: Generate Comms Lines
+
+1. Open 11Labs → select comms voices (Voice A = raid lead, Voice B = secondary pilot)
+2. Generate each line from [`intel-audio-script.md` §5](intel-audio-script.md) — one file per line
+3. Export as MP3, name per the script: `COMMS_A_010_teaser-hook.mp3` through `COMMS_B_070_ping-ready.mp3`
+4. Processing at this stage: dry (no reverb, no FX). Radio filter and compression applied in the mix stage.
+5. If only one comms voice available: generate all lines, then pitch-shift one speaker ~3 semitones (see §B Fallback)
+
+### Step 3: Source or Create FX
+
+| File | Description | Source |
+|------|-------------|--------|
+| `FX_010_static-burst.mp3` | Opening static burst (0.3–0.5s) | Free SFX library or generate |
+| `FX_020_radio-hiss-bed.mp3` | Low continuous radio hiss (loop) | Free SFX library or generate |
+| `FX_030_signal-dropout.mp3` | Closing crackle + signal loss | Free SFX library or generate |
+
+### Step 4: Mix Comms Master
+
+1. Open Descript (or DAW)
+2. Follow the assembly plan in [`intel-audio-script.md` §6](intel-audio-script.md):
+   - Start with `FX_010_static-burst.mp3`
+   - Sequence comms lines with ~0.3–0.5s gaps
+   - Layer `FX_020_radio-hiss-bed.mp3` underneath at low volume
+   - Apply radio filter / compression to all voice tracks
+   - End with `FX_030_signal-dropout.mp3`
+3. Export full mix → `ASSET_INTEL_FULL_master.mp3`
+4. Extract first 2 seconds → `ASSET_INTEL_TEASER_2s.mp3` (must cut mid-sentence after "Over a million fuel—")
+
+### Step 5: Verify
+
+- [ ] `ASSET_INTEL_FULL_master.mp3` plays correctly, ≤5 MB
+- [ ] `ASSET_INTEL_TEASER_2s.mp3` is exactly the first 2 seconds of the master
+- [ ] Teaser cuts mid-sentence — continuity with full recording is audible
+- [ ] All 7 narrator lines generated and named correctly
+- [ ] Record actual master duration → set `{{INTEL_DURATION_SECS}}` and `{{INTEL_DURATION_DISPLAY}}`
+
+---
+
+## I. Open Variables
 
 These items need to be locked before recording:
 

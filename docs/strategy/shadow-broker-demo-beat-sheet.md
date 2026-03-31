@@ -31,21 +31,21 @@ The demo builds **anticipation through denial** — but the teaser breaks the de
 |------|------|--------|-----------------|
 | 1.1 | 0:00 | Title card: "The Shadow Broker Protocol" | 3s fade-in, tagline: "Trustless intelligence for a lawless frontier" |
 | 1.2 | 0:03 | lacal's wallet connected, Upload Intel panel visible | `useDAppKit()` wallet connection, address shown truncated |
-| 1.3 | 0:07 | Narration: "An operative has intercepted alliance comms. A recording of rival leaders planning a raid on a fuel depot." | Show .wav file in system |
+| 1.3 | 0:07 | Narration: "An operative has intercepted alliance comms. A recording of rival leaders planning a raid on a fuel depot." | Show .mp3 file in system |
 | 1.4 | 0:12 | Spy drags audio file into upload zone | Client generates random AES-256-GCM key |
-| 1.5 | 0:15 | Progress bar: "Extracting preview…" | Web Audio API: `AudioContext.decodeAudioData()` → `AudioBuffer` → slice first 2 seconds → encode to WAV blob. This is the unencrypted teaser clip. |
+| 1.5 | 0:15 | Progress bar: "Extracting preview…" | Web Audio API: `AudioContext.decodeAudioData()` → `AudioBuffer` → slice first 2 seconds → encode to MP3 blob. This is the unencrypted teaser clip. |
 | 1.6 | 0:18 | Narration: "A two-second teaser. Just enough to prove the content is real." | Teaser clip shown as small waveform thumbnail in the upload form |
 | 1.7 | 0:21 | Progress bar: "Uploading teaser…" | `@mysten/walrus` SDK: `uploadBlob(teaserClipBytes)` → returns `teaserBlobId` (unencrypted, publicly readable) |
 | 1.8 | 0:24 | Progress bar: "Encrypting and uploading intel…" | `crypto.subtle.encrypt()` AES-256-GCM on full audio → `@mysten/walrus` `uploadBlob(encryptedAudioBytes)` → returns `blobId` |
 | 1.9 | 0:30 | Progress bar: "Sealing encryption key…" | `@mysten/seal` SDK: `SealClient.encrypt({...})` — Seal-encrypts the AES key with policy: "owner of IntelObject NFT" |
-| 1.10 | 0:35 | Progress bar: "Minting IntelObject…" | PTB calls `shadow_broker::intel::mint_intel()` — creates IntelObject NFT containing: `blob_id`, `teaser_blob_id`, `encrypted_key`, metadata (`file_type: "audio/wav"`, `duration_seconds: {{INTEL_DURATION_SECS}}`, `file_size_bytes`, `description`) |
+| 1.10 | 0:35 | Progress bar: "Minting IntelObject…" | PTB calls `shadow_broker::intel::mint_intel()` — creates IntelObject NFT containing: `blob_id`, `teaser_blob_id`, `encrypted_key`, metadata (`file_type: "audio/mpeg"`, `duration_seconds: {{INTEL_DURATION_SECS}}`, `file_size_bytes`, `description`) |
 | 1.11 | 0:42 | IntelObject appears in wallet inventory. Metadata card visible: audio icon, duration, file size, teaser badge. | Sui explorer link briefly shown for mint tx |
 | 1.12 | 0:48 | Narration: "The intel is sealed. Only the holder can unlock it." | Pause beat — let it land |
 
 **Envelope encryption flow (shown as subtle diagram overlay at 0:24):**
 ```
-Audio .wav → First 2 seconds → teaser clip → Walrus (teaserBlobId) [unencrypted]
-Audio .wav → AES-256-GCM encrypt → encrypted blob → Walrus (blobId)
+Audio .mp3 → First 2 seconds → teaser clip → Walrus (teaserBlobId) [unencrypted]
+Audio .mp3 → AES-256-GCM encrypt → encrypted blob → Walrus (blobId)
 AES key → Seal encrypt (policy: IntelObject owner) → encrypted_key → on-chain
 ```
 
@@ -117,7 +117,7 @@ AES key → Seal encrypt (policy: IntelObject owner) → encrypted_key → on-ch
 - Pre-op raid planning between two voices — see `intel-audio-script.md` for the canonical script
 - Opens with the same words as the teaser, then continues into target details, fleet composition, staging, and contingency planning
 - Post-process: radio filter, compression, walkie-talkie aesthetic, low hiss bed
-- Full file must be ≤5 MB (Walrus upload speed matters for demo pacing). WAV preferred for waveform fidelity.
+- Full file must be ≤5 MB (Walrus upload speed matters for demo pacing). MP3 format — tested and verified in the encrypt/decrypt flow.
 
 **Duration tokens:**
 - `{{INTEL_DURATION_SECS}}` — actual master file length in seconds (set after final mix)

@@ -117,20 +117,20 @@ Generate each spoken line as a separate audio file, then mix into one master ass
 
 | Filename | Voice | Content |
 |----------|-------|---------|
-| `COMMS_A_010_teaser-hook.wav` | A | "Target's IMT-GV3. P5L2. Over a million fuel in the SSU, plus packaged materials." |
-| `COMMS_B_010_confirmed.wav` | B | "That confirmed?" |
-| `COMMS_A_020_plan.wav` | A | "Confirmed. Friday evening op…" |
-| `COMMS_B_020_defence-question.wav` | B | "Defence?" |
-| `COMMS_A_030_defence.wav` | A | "Turrets on grid. Doesn't matter…" |
-| `COMMS_B_030_staging-question.wav` | B | "What's the staging?" |
-| `COMMS_A_040_staging.wav` | A | "One jump out. Hold until everyone's in…" |
-| `COMMS_B_040_readback.wav` | B | "Copy. IMT-GV3, P5L2, Friday evening…" |
-| `COMMS_A_050_chumaq-hold.wav` | A | "Keep the CHUMAQs in a safe until the grid's clean…" |
-| `COMMS_B_050_maul-confirm.wav` | B | "Copy. Both MAUL pilots confirmed?" |
-| `COMMS_A_060_contingency.wav` | A | "One is. Waiting on the second…" |
-| `COMMS_B_060_scouts.wav` | B | "Scouts on the entry?" |
-| `COMMS_A_070_eyes-out.wav` | A | "Yeah. Eyes one jump out…" |
-| `COMMS_B_070_ping-ready.wav` | B | "Understood. I'll have the ping ready." |
+| `COMMS_A_010_teaser-hook.mp3` | A | "Target's IMT-GV3. P5L2. Over a million fuel in the SSU, plus packaged materials." |
+| `COMMS_B_010_confirmed.mp3` | B | "That confirmed?" |
+| `COMMS_A_020_plan.mp3` | A | "Confirmed. Friday evening op…" |
+| `COMMS_B_020_defence-question.mp3` | B | "Defence?" |
+| `COMMS_A_030_defence.mp3` | A | "Turrets on grid. Doesn't matter…" |
+| `COMMS_B_030_staging-question.mp3` | B | "What's the staging?" |
+| `COMMS_A_040_staging.mp3` | A | "One jump out. Hold until everyone's in…" |
+| `COMMS_B_040_readback.mp3` | B | "Copy. IMT-GV3, P5L2, Friday evening…" |
+| `COMMS_A_050_chumaq-hold.mp3` | A | "Keep the CHUMAQs in a safe until the grid's clean…" |
+| `COMMS_B_050_maul-confirm.mp3` | B | "Copy. Both MAUL pilots confirmed?" |
+| `COMMS_A_060_contingency.mp3` | A | "One is. Waiting on the second…" |
+| `COMMS_B_060_scouts.mp3` | B | "Scouts on the entry?" |
+| `COMMS_A_070_eyes-out.mp3` | A | "Yeah. Eyes one jump out…" |
+| `COMMS_B_070_ping-ready.mp3` | B | "Understood. I'll have the ping ready." |
 
 ### Sound effects
 
@@ -144,21 +144,21 @@ Generate each spoken line as a separate audio file, then mix into one master ass
 
 | Filename | Description |
 |----------|-------------|
-| `ASSET_INTEL_FULL_master.wav` | Mixed-down full comms recording (uploaded to Walrus, encrypted) |
-| `ASSET_INTEL_TEASER_2s.wav` | First 2 seconds extracted from master (uploaded to Walrus, unencrypted) |
+| `ASSET_INTEL_FULL_master.mp3` | Mixed-down full comms recording (uploaded to Walrus, encrypted) |
+| `ASSET_INTEL_TEASER_2s.mp3` | First 2 seconds extracted from master (uploaded to Walrus, unencrypted) |
 
 ---
 
 ## 6. Assembly Plan
 
 1. **Open** with `FX_010_static-burst.mp3` (~0.3s)
-2. **Immediately** begin `COMMS_A_010_teaser-hook.wav` — Voice A's first line starts right after the static burst
+2. **Immediately** begin `COMMS_A_010_teaser-hook.mp3` — Voice A's first line starts right after the static burst
 3. **Layer** `FX_020_radio-hiss-bed.mp3` underneath the entire recording at low volume
 4. **Sequence** remaining lines with natural conversational gaps (~0.3–0.5s between speakers)
 5. **Apply** radio filter / compression to all voice tracks (walkie-talkie aesthetic)
 6. **End** with `FX_030_signal-dropout.mp3` — brief crackle then silence
-7. **Export** the full mix as `ASSET_INTEL_FULL_master.wav`
-8. **Extract** the first 2 seconds as `ASSET_INTEL_TEASER_2s.wav` — this must cut mid-sentence after "Over a million fuel—"
+7. **Export** the full mix as `ASSET_INTEL_FULL_master.mp3`
+8. **Extract** the first 2 seconds as `ASSET_INTEL_TEASER_2s.mp3` — this must cut mid-sentence after "Over a million fuel—"
 
 **Critical:** The teaser is a slice of the master, not a separately generated file. Continuity between teaser and full recording is the proof-of-authenticity mechanic.
 
