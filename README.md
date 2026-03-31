@@ -21,7 +21,7 @@ The Shadow Broker Protocol is a cryptographic intelligence marketplace for [EVE 
 
 ## The Problem: Fair Exchange
 
-Corporate espionage is EVE's most celebrated metagame. Spies acquire valuable intel (fleet positions, alliance comms recordings, staging coordinates) but have no trustless way to sell it:
+Corporate espionage is one of EVE's defining metagames. Spies acquire valuable intel (fleet positions, alliance comms recordings, staging coordinates) but have no trustless way to sell it:
 
 1. **Spy sends first → buyer doesn't pay.** No leverage after disclosure.
 2. **Buyer pays first → spy sends garbage.** No recourse after payment.
@@ -164,7 +164,7 @@ npm run build   # Production build
 
 ## Key Technical Decisions
 
-- **Standalone marketplace.** No world-contracts / EVE SSU dependency. The project's value is the Mysten Trinity, not world-contracts integration.
+- **Standalone marketplace.** No world-contracts dependency. The core contribution is the Walrus + Seal + Sui exchange pattern, not world-contracts integration.
 - **Envelope encryption.** AES-encrypt content locally, Seal-encrypt only the AES key. Performant for any file size.
 - **2-transaction seller flow.** TX1: mint (get object ID). TX2: update sealed key + list (single PTB). Decouples minting from Seal encryption.
 - **Audio teaser.** 2-second unencrypted clip on Walrus provides proof-of-life without revealing substance.

@@ -110,7 +110,7 @@ The 3-digit number sets timeline order (use 010/020/030 gaps for inserts). The s
 ### Voice Assets — Narrator
 | Filename | Beat | Spoken Line |
 |----------|------|-------------|
-| `VO_NARR_010_title.mp3` | 1.3 | "An operative has intercepted alliance comms. A recording of rival leaders planning a raid on a fuel depot." |
+| `VO_NARR_010_title.mp3` | 1.3 | "An operative has intercepted alliance comms. A recording of players planning a raid on a fuel depot." |
 | `VO_NARR_020_teaser-proof.mp3` | 1.6 | "A two-second teaser. Just enough to prove the content is real." |
 | `VO_NARR_030_sealed.mp3` | 1.12 | "The intel is sealed. Only the holder can unlock it." |
 | `VO_NARR_040_two-seconds.mp3` | 2.6 | "Two seconds. Just enough to hear something real. Not enough to know why it matters." |
@@ -227,7 +227,7 @@ Step-by-step production path from script to final assets. This section makes the
 - [ ] `ASSET_INTEL_TEASER_2s.mp3` is exactly the first 2 seconds of the master
 - [ ] Teaser cuts mid-sentence — continuity with full recording is audible
 - [ ] All 7 narrator lines generated and named correctly
-- [ ] Record actual master duration → set `{{INTEL_DURATION_SECS}}` and `{{INTEL_DURATION_DISPLAY}}`
+- [x] Master duration locked: **39 seconds** (display: **0:39**)
 
 ---
 
@@ -235,7 +235,7 @@ Step-by-step production path from script to final assets. This section makes the
 
 These items need to be locked before recording:
 
-- [ ] **Final price value** — beat sheet uses `{{PRICE_DISPLAY}}` (human-readable UI price) and `{{PRICE_BASE_UNITS}}` (exact on-chain amount used in the purchase transaction). Lock both before recording. Narration no longer speaks the price, so changing it only requires re-capturing the listing UI.
+- [x] **Final price value** — **100,000 Lux** (on-chain: `1000000000000` base units). Derived from canonical `format.ts`: 1 Lux = 10^7 base units. Narration no longer speaks the price, so changing it only requires re-capturing the listing UI.
 - [ ] **Comms script finalized** — canonical version in `intel-audio-script.md`; review and lock before generation
 - [ ] **11Labs voice selection** — pick narrator voice and comms voice(s)
 - [ ] **Teaser source clip recorded** — cannot extract teaser until full comms recording exists
