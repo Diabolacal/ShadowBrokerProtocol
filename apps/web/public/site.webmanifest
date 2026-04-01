@@ -1,0 +1,16 @@
+{
+  "name": "Shadow Broker Protocol",
+  "short_name": "SB Protocol",
+  "description": "Encrypted audio intelligence marketplace for EVE Frontier. Trustless buying and selling of intel, built on Walrus + Seal + Sui.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0c0c0c",
+  "theme_color": "#0c0c0c",
+  "icons": [
+    {
+      "src": "/assets/branding/shadow-broker-logo.png",
+      "sizes": "1024x1024",
+      "type": "image/png"
+    }
+  ]
+}
